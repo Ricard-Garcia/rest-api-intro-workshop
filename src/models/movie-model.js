@@ -11,20 +11,7 @@ const MovieSchema = Schema({
     type: Date,
     required: [true, "Release year is required"],
   },
-  genres: {
-    type: Array,
-    enum: [
-      "Humor",
-      "Romantic",
-      "Photographic",
-      "Idalist",
-      "Society",
-      "Musical",
-      "Thriller",
-    ],
-
-    required: [true, "At least one genre should be declared"],
-  },
+  genres: [String],
   duration: {
     type: Number,
     required: [true, "Duration is required"],
@@ -45,5 +32,5 @@ const MovieSchema = Schema({
 const MovieModel = mongoose.model("movie", MovieSchema);
 
 module.exports = {
-  Movie: MovieModel,
+  MovieModel: MovieModel,
 };

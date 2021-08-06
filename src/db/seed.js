@@ -1,16 +1,17 @@
-const { db } = require("../models");
 const { seedMovies, seedPeople } = require("../db/data");
 
-async function loadMovies() {
-  await db.Movies.deleteMany({});
-  await db.Movies.createMany(seedMovies());
-}
-
-async function loadPeople() {
+async function loadPeople(db) {
   await db.Person.deleteMany({});
-  await db.Person.createMany(seedPeople());
+  const defaultPeople = await seedPeople();
+  await db.Person.insertMany(defaultPeople);
 }
 
+async function loadMovies(db) {
+  await db.Movie.deleteMany({});
+  const defaultMovies = await seedMovies(db);
+  console.log(defaultMovies);
+  await db.Movie.insertMany(defaultMovies);
+}
 module.exports = {
   loadMovies: loadMovies,
   loadPeople: loadPeople,

@@ -10,13 +10,13 @@ const PersonSchema = Schema(
     },
     dateOfBirth: {
       type: Date,
-      unique: true,
+      unique: false,
       required: [true, "Date of birth is required"],
     },
 
     placeOfBirth: {
       type: String,
-      unique: true,
+      unique: false,
       required: [true, "Place of birth is required"],
     },
     movies: [{ type: String, required: true }],
