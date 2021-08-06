@@ -1,5 +1,5 @@
-const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 
 const PersonSchema = Schema(
   {
@@ -19,15 +19,23 @@ const PersonSchema = Schema(
       unique: true,
       required: [true, "Place of birth is required"],
     },
+    movies: [{ type: String, required: true }],
     roles: [
       {
         type: String,
-        enum: ["actor", "actress", "director", "camera", "composer"],
+        enum: [
+          "actor",
+          "actress",
+          "director",
+          "camera",
+          "composer",
+          "water-person",
+        ],
+        default: undefined,
         required: true,
       },
     ],
   },
-  //   Add createdAt and updatedAt
   {
     timestamps: true,
   },

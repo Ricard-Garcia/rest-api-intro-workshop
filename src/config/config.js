@@ -17,7 +17,7 @@ const {
 const CONFIG = {
   production: {
     app: {
-      port: PORT,
+      port: PORT || 4000,
     },
     db: {
       url: MONGO_DB_URL_PRODUCTION,
@@ -28,7 +28,7 @@ const CONFIG = {
   },
   development: {
     app: {
-      port: PORT,
+      port: PORT || 4000,
     },
     db: {
       url: MONGO_DB_URL_DEVELOPMENT,
@@ -39,7 +39,7 @@ const CONFIG = {
   },
   test: {
     app: {
-      port: PORT,
+      port: PORT || 4000,
     },
     db: {
       url: MONGO_DB_URL_TEST,
