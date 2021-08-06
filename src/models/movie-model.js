@@ -17,12 +17,12 @@ const MovieSchema = Schema({
     required: [true, "Duration is required"],
   },
   cast: {
-    type: [{ type: String, trim: true }],
+    type: [{ type: Object, trim: true }],
     default: undefined,
     required: true,
   },
   crew: {
-    type: [{ type: String, trim: true }],
+    type: [{ type: Object, trim: true }],
     default: undefined,
     required: true,
   },

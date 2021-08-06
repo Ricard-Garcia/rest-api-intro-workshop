@@ -211,7 +211,7 @@ function seedPeople() {
       name: "Uma Thurman",
       dateOfBirth: new Date("1970-04-29"),
       placeOfBirth: "Boston",
-      movies: ["Kill Bill"],
+      movies: ["Kill Bill Vol. 1"],
       roles: ["actor"],
     },
     {

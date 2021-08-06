@@ -9,7 +9,6 @@ async function loadPeople(db) {
 async function loadMovies(db) {
   await db.Movie.deleteMany({});
   const defaultMovies = await seedMovies(db);
-  console.log(defaultMovies);
   await db.Movie.insertMany(defaultMovies);
 }
 module.exports = {
