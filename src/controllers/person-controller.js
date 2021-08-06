@@ -26,7 +26,7 @@ async function register(req, res, next) {
 async function getPersons(req, res, next) {
   try {
     const foundPersons = await db.Person.find({});
-    res.status(200).send({ found: foundPersons });
+    res.status(200).send({ message: "Loaded all people", found: foundPersons });
     return;
   } catch (error) {
     res.status(500).send({ message: "Failed to get persons. ", error: error });
