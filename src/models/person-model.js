@@ -1,30 +1,40 @@
-// Imports
-const dotenv = require("dotenv");
+const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-dotenv.config();
-
-const {
-  NODE_ENV = "development",
-  MONGO_DB_URL_PRODUCTION,
-  MONGO_DB_URL_DEVELOPMENT,
-  MONGO_DB_URL_TEST,
-  PORT,
-  API_KEY,
-  PASSWORD_ENCRYPTED_SECRET,
-} = process.env;
-
-// Config object
-const CONFIG = {
-  production: {
-    app: {
-      port: PORT,
+const PersonSchema = Schema(
+  {
+    name: {
+      type: String,
+      unique: true,
+      required: [true, "Name is required"],
     },
-    db: {
-      url: MONGO,
+    dateOfBirth: {
+      type: Date,
+      unique: true,
+      required: [true, "Date of birth is required"],
     },
+
+    placeOfBirth: {
+      type: String,
+      unique: true,
+      required: [true, "Place of birth is required"],
+    },
+    roles: [
+      {
+        type: String,
+        unique: true,
+      },
+    ],
   },
-};
+  //   Add createdAt and updatedAt
+  {
+    timestamps: true,
+  },
+);
+
+// New collection
+const PersonModel = mongoose.model("person", PersonSchema);
 
 module.exports = {
-  config: CONFIG[NODE_ENV],
+  PersonModel: PersonModel,
 };
