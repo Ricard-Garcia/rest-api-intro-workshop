@@ -3,8 +3,8 @@ const db = require("../models");
 // /movies/
 // POST movies
 async function register(req, res, next) {
+  const { title, releaseYear, genres, duration, cast, crew } = req.body;
   try {
-    const { title, releaseYear, genres, duration, cast, crew } = req.body;
     const registeredMovie = await db.Movie.create({
       title: title,
       releaseYear: releaseYear,
@@ -13,31 +13,82 @@ async function register(req, res, next) {
       cast: cast,
       crew: crew,
     });
-    return res.status(200).send({
-      message: `Registered movie ${title}`,
+    res.status(200).send({
+      message: `Registered movie ${title}.`,
       registered: registeredMovie,
     });
   } catch (error) {
-    return res
-      .status(500)
-      .send({ message: "Failed to insert movie. ", error: error });
+    res.status(500).send({ message: "Failed to insert movie. ", error: error });
   }
 }
 
 // GET movies
-async function getMovies(req, res, next) {
+async function getAll(req, res, next) {
   try {
     const foundMovies = await db.Movie.find({});
-    return res
-      .status(200)
-      .send({ message: "Loaded all movies", found: foundMovies });
+    res.status(200).send({ message: "Loaded all movies.", found: foundMovies });
   } catch (error) {
     console.log(error.message);
-    return res.status(500).send({ message: "Couldn't get all movies" });
+    res
+      .status(500)
+      .send({ message: "Failed to get all movies.", error: error.message });
+  }
+}
+
+// /movies/:id
+// GET movie
+async function getById(req, res, next) {
+  const { id } = req.params;
+  try {
+    const foundMovie = await db.Movie.findById(id);
+    res
+      .status(200)
+      .send({ message: `Loaded movie with id: ${id}`, found: foundMovie });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Failed to get movie.", error: error.message });
+  }
+}
+
+// PATCH movie
+async function updateById(req, res, next) {
+  const { id } = req.params;
+  try {
+    const updatedMovie = await db.Movie.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).send({
+      message: `Updated movie with id: ${id}.`,
+      updated: updatedMovie,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Failed to update movie.", error: error.message });
+  }
+}
+
+// DELETE movie
+async function deleteById(req, res, next) {
+  const { id } = req.params;
+  try {
+    const deletedMovie = await db.Movie.deleteOne({ _id: id });
+    res.status(200).send({
+      message: `Deleted movie with id ${id}.`,
+      deleted: deletedMovie,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ message: "Failed to delete movie.", error: error.message });
   }
 }
 
 module.exports = {
   register: register,
-  getMovies: getMovies,
+  getAll: getAll,
+  getById: getById,
+  updateById: updateById,
+  deleteById: deleteById,
 };
