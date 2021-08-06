@@ -21,6 +21,7 @@ async function register(req, res, next) {
   }
 }
 
+// GET persons
 async function getPersons(req, res, next) {
   try {
     const persons = await db.Person.find({});
@@ -35,10 +36,12 @@ async function getPersons(req, res, next) {
 // GET person
 async function getById(req, res, next) {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     console.log("Request body: ", req.body);
-    await db.Person.find({ _id: id }).exec();
-    return res.status(200).send({ message: `Get person with id: ${id}` });
+    const foundPerson = await db.Person.find({ _id: id }).exec();
+    return res
+      .status(200)
+      .send({ message: `Get person with id: ${id}`, foundPerson });
   } catch (error) {
     return res.status(500).send({ message: "Failed to get person." });
   }
