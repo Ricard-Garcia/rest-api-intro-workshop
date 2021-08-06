@@ -22,7 +22,8 @@ const PersonSchema = Schema(
     roles: [
       {
         type: String,
-        unique: true,
+        enum: ["actor", "actress", "director", "camera", "composer"],
+        required: true,
       },
     ],
   },
