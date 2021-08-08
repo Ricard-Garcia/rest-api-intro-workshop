@@ -83,6 +83,7 @@ async function deleteById(req, res, next) {
   try {
     const deletedPerson = await db.Person.deleteOne({ _id: id });
 
+    // Delete person from movies
     res.status(200).send({
       message: `Deleted person with id ${id}.`,
       deleted: deletedPerson,

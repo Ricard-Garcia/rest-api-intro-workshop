@@ -34,7 +34,6 @@ async function getAll(req, res, next) {
       res.status(200).send({ message: "No movies registered." });
     }
   } catch (error) {
-    console.log(error.message);
     res
       .status(500)
       .send({ message: "Failed to get all movies.", error: error.message });
