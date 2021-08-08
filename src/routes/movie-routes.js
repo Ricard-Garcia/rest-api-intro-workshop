@@ -9,14 +9,14 @@ const MovieRouter = Router();
 MovieRouter.get("/:id/credits", verifyToken, CreditsController.getAll);
 
 // GET movie
-MovieRouter.get("/:id", MovieController.getById);
+MovieRouter.get("/:id", verifyToken, MovieController.getById);
 // PATCH movie
-MovieRouter.patch("/:id", MovieController.updateById);
+MovieRouter.patch("/:id", verifyToken, MovieController.updateById);
 // DELETE movie
-MovieRouter.delete("/:id", MovieController.deleteById);
+MovieRouter.delete("/:id", verifyToken, MovieController.deleteById);
 
 // POST movie
-MovieRouter.post("/", MovieController.register);
+MovieRouter.post("/", verifyToken, MovieController.register);
 // GET movies
 MovieRouter.get("/", verifyToken, MovieController.getAll);
 

@@ -1,15 +1,16 @@
-const Router = require("express").Router;
 const { UserController } = require("../controllers");
+const { verifyToken } = require("../middleware");
+const Router = require("express").Router;
 
 // Declaring the router
 const UserRouter = Router();
 
 // GET user
-UserRouter.get("/:id", UserController.getById);
+UserRouter.get("/:id", verifyToken, UserController.getById);
 // PATCH user
-UserRouter.patch("/:id", UserController.updateById);
+UserRouter.patch("/:id", verifyToken, UserController.updateById);
 // DELETE user
-UserRouter.delete("/:id", UserController.deleteById);
+UserRouter.delete("/:id", verifyToken, UserController.deleteById);
 
 // GET users
 UserRouter.get("/", UserController.getAll);

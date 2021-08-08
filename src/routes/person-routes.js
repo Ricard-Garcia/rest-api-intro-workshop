@@ -1,20 +1,21 @@
-const Router = require("express").Router;
 const { PersonController } = require("../controllers");
+const { verifyToken } = require("../middleware");
+const Router = require("express").Router;
 
 // Declaring the router
 const PersonRouter = Router();
 
 // GET person
-PersonRouter.get("/:id", PersonController.getById);
+PersonRouter.get("/:id", verifyToken, PersonController.getById);
 // PATCH person
-PersonRouter.patch("/:id", PersonController.updateById);
+PersonRouter.patch("/:id", verifyToken, PersonController.updateById);
 // DELETE person
-PersonRouter.delete("/:id", PersonController.deleteById);
+PersonRouter.delete("/:id", verifyToken, PersonController.deleteById);
 
 // POST person
-PersonRouter.post("/", PersonController.register);
+PersonRouter.post("/", verifyToken, PersonController.register);
 // GET persons
-PersonRouter.get("/", PersonController.getAll);
+PersonRouter.get("/", verifyToken, PersonController.getAll);
 
 module.exports = {
   PersonRouter: PersonRouter,
