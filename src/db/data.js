@@ -1,18 +1,19 @@
-// seed users
-function seedUsers() {
+const { encryptPassword } = require("../utils/password-hash");
+
+async function seedUsers() {
   return [
     {
       name: "Mike",
       last_name: "Velcro",
       email: "mike@velcro.com",
-      password: "p0lalfageme",
+      password: await encryptPassword("p0lalfageme"),
       is_admin: false,
     },
     {
       name: "Rick",
       last_name: "László",
       email: "rick@laszlo.com",
-      password: "123456",
+      password: await encryptPassword("123456"),
       is_admin: true,
     },
   ];
