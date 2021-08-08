@@ -1,8 +1,11 @@
 const Router = require("express").Router;
-const { MovieController } = require("../controllers");
+const { MovieController, CreditsController } = require("../controllers");
 
 // Declaring the router
 const MovieRouter = Router();
+
+// GET all credits
+MovieRouter.get("/:id/credits", CreditsController.getAll);
 
 // GET movie
 MovieRouter.get("/:id", MovieController.getById);
