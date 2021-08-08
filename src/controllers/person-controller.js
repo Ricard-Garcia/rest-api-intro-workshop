@@ -26,7 +26,13 @@ async function register(req, res, next) {
 async function getAll(req, res, next) {
   try {
     const foundPeople = await db.Person.find({});
-    res.status(200).send({ message: "Loaded all people.", found: foundPeople });
+    if (foundPeople.length != 0) {
+      res
+        .status(200)
+        .send({ message: "Loaded all people.", found: foundPeople });
+    } else {
+      res.status(200).send({ message: "No person registered." });
+    }
   } catch (error) {
     res
       .status(500)

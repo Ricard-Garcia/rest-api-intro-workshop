@@ -29,6 +29,7 @@ async function signUp(req, res, next) {
 }
 
 // /users/
+// GET users
 async function getAll(req, res, next) {
   try {
     const foundUsers = await db.User.find({});

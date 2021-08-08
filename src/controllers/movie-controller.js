@@ -26,7 +26,13 @@ async function register(req, res, next) {
 async function getAll(req, res, next) {
   try {
     const foundMovies = await db.Movie.find({});
-    res.status(200).send({ message: "Loaded all movies.", found: foundMovies });
+    if (foundMovies.length != 0) {
+      res
+        .status(200)
+        .send({ message: "Loaded all movies.", found: foundMovies });
+    } else {
+      res.status(200).send({ message: "No movies registered." });
+    }
   } catch (error) {
     console.log(error.message);
     res
