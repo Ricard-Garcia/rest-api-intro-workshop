@@ -10,7 +10,7 @@ const {
   MONGO_DB_URL_TEST,
   PORT,
   API_KEY,
-  PASSWORD_ENCRYPTED_SECRET,
+  PASSWORD_ENCRYPTED_SALT,
 } = process.env;
 
 // Config object
@@ -23,7 +23,7 @@ const CONFIG = {
       url: MONGO_DB_URL_PRODUCTION,
     },
     encrypt: {
-      secret: PASSWORD_ENCRYPTED_SECRET,
+      secret: PASSWORD_ENCRYPTED_SALT,
     },
   },
   development: {
@@ -34,7 +34,7 @@ const CONFIG = {
       url: MONGO_DB_URL_DEVELOPMENT,
     },
     encrypt: {
-      secret: PASSWORD_ENCRYPTED_SECRET,
+      secret: PASSWORD_ENCRYPTED_SALT,
     },
   },
   test: {
@@ -45,7 +45,7 @@ const CONFIG = {
       url: MONGO_DB_URL_TEST,
     },
     encrypt: {
-      secret: PASSWORD_ENCRYPTED_SECRET,
+      secret: PASSWORD_ENCRYPTED_SALT,
     },
   },
 };

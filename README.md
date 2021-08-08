@@ -4,6 +4,14 @@
 
 In this workshop you will learn how to build a REST API with Node.js, MongoDB and Mongoose.
 
+## TODO
+
+- Add user flow
+- Add pagination (`skip()` and `limit()`)
+- Delete movies from persons when movie deleted
+- Delete person from movies when person deleted
+- Update
+
 ## Table of Contents <!-- omit in toc -->
 
 - [Getting Started](#getting-started)
