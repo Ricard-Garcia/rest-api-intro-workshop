@@ -1,32 +1,4 @@
 const db = require("../models");
-const { encryptPassword } = require("../utils/password-hash");
-
-// /account/register
-// POST user
-async function signUp(req, res, next) {
-  const { name, last_name, email, password, is_admin } = req.body;
-  try {
-    const encryptedPassword = await encryptPassword(password);
-
-    const registeredUser = await db.User.create({
-      name: name,
-      last_name: last_name,
-      email: email,
-      password: encryptedPassword,
-      is_admin: is_admin,
-    });
-
-    res.status(200).send({
-      message: `Registered user ${name}`,
-      registered: registeredUser,
-    });
-  } catch (error) {
-    res.status(500).send({
-      message: "Failed to register user",
-      error: error.message,
-    });
-  }
-}
 
 // /users/
 // GET users
@@ -101,7 +73,6 @@ async function deleteById(req, res, next) {
 }
 
 module.exports = {
-  signUp: signUp,
   getAll: getAll,
   getById: getById,
   updateById: updateById,
