@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "960a9d1b-48d7-4c57-8157-2305b1731487",
+		"name": "NodeJS REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Authentification",
+					"item": [
+						{
+							"name": "Sign up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Aida\",\n    \"last_name\": \"Gomez\",\n    \"email\": \"aida@gomez.com\",\n    \"password\": \"123456\",\n    \"is_admin\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/account/register"
+							},
+							"response": []
+						},
+						{
+							"name": "Sign in",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ricard\",\n    \"email\": \"ricard@garcia.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4000/account/authenticate"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:4000/users/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user (id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:4000/users/610ffc51b5ebbf39148c3e66"
+					},
+					"response": []
+				},
+				{
+					"name": "Update user (id)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mike\",\n    \"last_name\": \"Velcro\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/users/610ffc51b5ebbf39148c3e66"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user (id)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pol\",\n    \"last_name\": \"Alfageme\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/users/610fc243b90eeb1fcbae46af"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "Post new person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ricard\",\n    \"dateOfBirth\": \"1992-06-11\",\n    \"placeOfBirth\": \"Badalona\",\n    \"roles\": [\n        \"actor\"        \n        ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/persons/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get person (id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/persons/610fccbefb2cea26c9644b1c"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all persons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/persons/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update person (id)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Wes\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/persons/610d4f417d00c8353938b347"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete person (id)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/persons/610fe0cca84a572b4213f99c"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Credits",
+					"item": [
+						{
+							"name": "Get movie's credits (id)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:4000/movies/610fc243b90eeb1fcbae46cd/credits"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post new movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Fantastic Mr. Fox\",\n    \"releaseYear\": \"2009\",\n    \"duration\": 87,\n    \"genres\": [\"Humor\", \"Animation\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4000/movies/"
+					},
+					"response": []
+				},
+				{
+					"name": "Get movie (id)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "acces-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/movies/610fe30c2714702cd9e160fc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"movies",
+								"610fe30c2714702cd9e160fc"
+							],
+							"query": [
+								{
+									"key": "access-token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all movies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMTAwYWNmNDRjMmRhNDE2ZjczYTZjNCIsImlhdCI6MTYyODQ0MTI5NSwiZXhwIjoxNjI4NTI3Njk1fQ.MJzsvu7No3Q0-zjESXUPNDxrwoBa7JdGGiP267NKHj4",
+								"type": "text"
+							},
+							{
+								"key": "old-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "http://localhost:4000/movies/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update movie (id)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Life Aquatic\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/movies/610d4f417d00c8353938b362",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"movies",
+								"610d4f417d00c8353938b362"
+							],
+							"query": [
+								{
+									"key": "access-token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie (id)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Life Aquatic\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/movies/610fcd4ea776cd27309c5386",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"movies",
+								"610fcd4ea776cd27309c5386"
+							],
+							"query": [
+								{
+									"key": "access-token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMGZmZDBiYzk3OTI4Mzk4NDZhNDA5YSIsImlhdCI6MTYyODQzNzc3MSwiZXhwIjoxNjI4NTI0MTcxfQ.SVjVlh7mJVloOyHft275DQLQFB0pjSVOZX6b7BbI0kY",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

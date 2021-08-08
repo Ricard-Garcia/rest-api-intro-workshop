@@ -58,7 +58,6 @@ async function signIn(req, res, next) {
       const token = jwt.sign({ id: userFound._id }, config.secret.keyword, {
         expiresIn: 86400,
       });
-      console.log(token);
 
       res.status(200).send({
         matchPassword: matchPassword,

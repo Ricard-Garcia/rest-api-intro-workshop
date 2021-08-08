@@ -14,6 +14,9 @@ async function verifyToken(req, res, next) {
 
     // Check if token=userId is true
     const foundUser = await db.User.findById(decodedToken.id, { password: 0 });
+
+    console.log("Is this user admin? ", foundUser.is_admin);
+
     if (!foundUser) {
       res.status(403).send({ message: "No user found." });
     } else if (!foundUser.is_admin) {

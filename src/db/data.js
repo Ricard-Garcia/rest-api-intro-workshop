@@ -6,7 +6,7 @@ async function seedUsers() {
       name: "Mike",
       last_name: "Velcro",
       email: "mike@velcro.com",
-      password: await encryptPassword("p0lalfageme"),
+      password: await encryptPassword("123456"),
       is_admin: false,
     },
     {
