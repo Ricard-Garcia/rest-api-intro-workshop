@@ -1,4 +1,22 @@
 // seed users
+function seedUsers() {
+  return [
+    {
+      name: "Mike",
+      last_name: "Velcro",
+      email: "mike@velcro.com",
+      password: "p0lalfageme",
+      is_admin: false,
+    },
+    {
+      name: "Rick",
+      last_name: "László",
+      email: "rick@laszlo.com",
+      password: "123456",
+      is_admin: true,
+    },
+  ];
+}
 
 function seedPeople() {
   return [
@@ -270,6 +288,7 @@ async function seedMovies(db) {
 }
 
 module.exports = {
+  seedUsers: seedUsers,
   seedPeople: seedPeople,
   seedMovies: seedMovies,
 };

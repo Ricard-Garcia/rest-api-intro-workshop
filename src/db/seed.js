@@ -1,4 +1,10 @@
-const { seedMovies, seedPeople } = require("../db/data");
+const { seedUsers, seedPeople, seedMovies } = require("../db/data");
+
+async function loadUsers(db) {
+  await db.User.deleteMany({});
+  const defaultUsers = await seedUsers();
+  await db.User.insertMany(defaultUsers);
+}
 
 async function loadPeople(db) {
   await db.Person.deleteMany({});
@@ -12,6 +18,7 @@ async function loadMovies(db) {
   await db.Movie.insertMany(defaultMovies);
 }
 module.exports = {
-  loadMovies: loadMovies,
+  loadUsers: loadUsers,
   loadPeople: loadPeople,
+  loadMovies: loadMovies,
 };
