@@ -84,9 +84,15 @@ async function deleteById(req, res, next) {
     const deletedPerson = await db.Person.deleteOne({ _id: id });
 
     // Delete person from movies
+    // const personToDelete = await db.Movie.deleteMany(
+    //   {},
+    //   { $pull: { crew: { _id: req.params.id } } },
+    // );
+
     res.status(200).send({
       message: `Deleted person with id ${id}.`,
       deleted: deletedPerson,
+      // found: personToDelete,
     });
   } catch (error) {
     res

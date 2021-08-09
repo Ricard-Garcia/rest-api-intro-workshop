@@ -8,14 +8,16 @@ async function verifyToken(req, res, next) {
   if (!token) {
     res.status(403).send({ message: "No token provided." });
   } else {
-    console.log(token);
+    // console.log(token);
+
     // Extrating the token
     const decodedToken = jwt.verify(token, config.secret.keyword);
 
     // Check if token=userId is true
     const foundUser = await db.User.findById(decodedToken.id, { password: 0 });
+    console.log(foundUser);
 
-    console.log("Is this user admin? ", foundUser.is_admin);
+    // console.log("Is this user admin? ", foundUser.is_admin);
 
     if (!foundUser) {
       res.status(403).send({ message: "No user found." });
