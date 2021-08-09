@@ -1,23 +1,19 @@
-const jwt = require("jsonwebtoken");
 const { config } = require("../config");
+const jwt = require("jsonwebtoken");
 const db = require("../models");
 
 async function verifyToken(req, res, next) {
-  const token = req.headers["access-token"];
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
-    res.status(403).send({ message: "No token provided." });
-  } else {
-    // console.log(token);
-
+  if (authHeader && authHeader.startsWith("Bearer ")) {
     // Extrating the token
-    const decodedToken = jwt.verify(token, config.secret.keyword);
+    const decodedToken = jwt.verify(
+      authHeader.substr(7),
+      config.secret.keyword,
+    );
 
     // Check if token=userId is true
     const foundUser = await db.User.findById(decodedToken.id, { password: 0 });
-    console.log(foundUser);
-
-    // console.log("Is this user admin? ", foundUser.is_admin);
 
     if (!foundUser) {
       res.status(403).send({ message: "No user found." });
@@ -26,6 +22,8 @@ async function verifyToken(req, res, next) {
     } else {
       next();
     }
+  } else {
+    res.status(403).send({ message: "No token provided." });
   }
 }
 

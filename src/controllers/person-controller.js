@@ -88,6 +88,10 @@ async function deleteById(req, res, next) {
     //   {},
     //   { $pull: { crew: { _id: req.params.id } } },
     // );
+    // const personToDelete = await db.Movie.update(
+    //   {},
+    //   { $pull: { crew: { _id: req.params.id } } },
+    // );
 
     res.status(200).send({
       message: `Deleted person with id ${id}.`,
