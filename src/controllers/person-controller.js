@@ -1,3 +1,4 @@
+const { deletePerson } = require("../utils/credits-update");
 const db = require("../models");
 
 // /persons/
@@ -83,20 +84,12 @@ async function deleteById(req, res, next) {
   try {
     const deletedPerson = await db.Person.deleteOne({ _id: id });
 
-    // Delete person from movies
-    // const personToDelete = await db.Movie.deleteMany(
-    //   {},
-    //   { $pull: { crew: { _id: req.params.id } } },
-    // );
-    // const personToDelete = await db.Movie.update(
-    //   {},
-    //   { $pull: { crew: { _id: req.params.id } } },
-    // );
+    const movies = await db.Movie.find({});
+    deletePerson(movies, id);
 
     res.status(200).send({
       message: `Deleted person with id ${id}.`,
       deleted: deletedPerson,
-      // found: personToDelete,
     });
   } catch (error) {
     res

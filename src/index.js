@@ -2,8 +2,8 @@
 const { app } = require("./server");
 const { config } = require("./config");
 const { dbConnection } = require("./db/connect");
-// const { loadDefaultData } = require("./db/seed");
-// const db = require("./models");
+const { loadDefaultData } = require("./db/seed");
+const db = require("./models");
 
 dbConnection().then(async function onConnection() {
   // Populating database

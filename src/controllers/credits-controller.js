@@ -1,5 +1,7 @@
 const db = require("../models");
 
+// /movies/:id/credits
+// GET credits
 async function getAll(req, res, next) {
   const { id } = req.params;
   try {
