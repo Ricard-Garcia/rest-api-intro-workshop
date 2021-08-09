@@ -1,5 +1,7 @@
 const { encryptPassword, comparePassword } = require("../utils/password-hash");
 const { tokenGenerator } = require("../services/token-generator");
+const { sessionData } = require("../session/session");
+const randToken = require("rand-token");
 const db = require("../models");
 
 // /account/register
@@ -18,14 +20,9 @@ async function signUp(req, res, next) {
       is_admin: is_admin,
     });
 
-    // User token
-    const token = tokenGenerator(registeredUser._id);
-    console.log("New user token: ", token);
-
     res.status(200).send({
       message: `Registered user ${name}`,
       registered: registeredUser,
-      token: token,
     });
   } catch (error) {
     res.status(500).send({
@@ -52,13 +49,17 @@ async function signIn(req, res, next) {
       res.status(401).send({ message: "Not valid password" });
     } else {
       // Assigning token
-      const token = tokenGenerator(userFound._id);
-      console.log("Already logged user token: ", token);
+      const accessToken = tokenGenerator(userFound._id);
+      const refreshToken = randToken.generate(256);
+      sessionData.refreshTokens[refreshToken] = userFound._id;
+
+      // console.log("Already logged user token: ", accessToken);
 
       res.status(200).send({
         matchPassword: matchPassword,
         found: userFound,
-        token: token,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
         is_admin: userFound.is_admin,
       });
     }

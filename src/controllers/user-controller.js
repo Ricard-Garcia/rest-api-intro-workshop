@@ -1,3 +1,5 @@
+const { tokenGenerator } = require("../services/token-generator");
+const { sessionData } = require("../session/session");
 const db = require("../models");
 
 // /users/
@@ -77,10 +79,29 @@ async function refreshToken(req, res, next) {
   const { id, refreshToken } = req.body;
 
   try {
+    // Check if the token has expired
+    console.log(sessionData);
+    console.log(refreshToken in sessionData.refreshTokens);
+    console.log(sessionData.refreshTokens[refreshToken] == id);
+    if (
+      refreshToken in sessionData.refreshTokens &&
+      sessionData.refreshTokens[refreshToken] == id
+    ) {
+      const accessToken = tokenGenerator(id);
+
+      return res.status(200).send({
+        message: `Registered user ${id}`,
+        accessToken: accessToken,
+      });
+    } else {
+      return res
+        .status(500)
+        .send({ message: "Something went wrong with refresh!" });
+    }
   } catch (error) {
-    return res
-      .status(500)
-      .send({ error: "Something went wrong with refresh!" });
+    return res.status(500).send({
+      error: error.message,
+    });
   }
 }
 
