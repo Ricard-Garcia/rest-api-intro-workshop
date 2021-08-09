@@ -72,9 +72,22 @@ async function deleteById(req, res, next) {
   }
 }
 
+// Refresh token
+async function refreshToken(req, res, next) {
+  const { id, refreshToken } = req.body;
+
+  try {
+  } catch (error) {
+    return res
+      .status(500)
+      .send({ error: "Something went wrong with refresh!" });
+  }
+}
+
 module.exports = {
   getAll: getAll,
   getById: getById,
   updateById: updateById,
   deleteById: deleteById,
+  refreshToken: refreshToken,
 };
