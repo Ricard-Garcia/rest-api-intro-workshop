@@ -17,8 +17,13 @@ async function loadMovies(db) {
   const defaultMovies = await seedMovies(db);
   await db.Movie.insertMany(defaultMovies);
 }
+
+async function loadDefaultData(db) {
+  await loadUsers(db);
+  await loadPeople(db);
+  await loadMovies(db);
+}
+
 module.exports = {
-  loadUsers: loadUsers,
-  loadPeople: loadPeople,
-  loadMovies: loadMovies,
+  loadDefaultData: loadDefaultData,
 };

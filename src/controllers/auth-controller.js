@@ -1,6 +1,5 @@
 const { encryptPassword, comparePassword } = require("../utils/password-hash");
-const jwt = require("jsonwebtoken");
-const { config } = require("../config");
+const { tokenGenerator } = require("../services/token-generator");
 const db = require("../models");
 
 // /account/register
@@ -20,10 +19,8 @@ async function signUp(req, res, next) {
     });
 
     // User token
-    console.log(registeredUser._id);
-    const token = jwt.sign({ id: registeredUser._id }, config.secret.keyword, {
-      expiresIn: 86400,
-    });
+    const token = tokenGenerator(registeredUser._id);
+    console.log("New user token: ", token);
 
     res.status(200).send({
       message: `Registered user ${name}`,
@@ -55,9 +52,8 @@ async function signIn(req, res, next) {
       res.status(401).send({ message: "Not valid password" });
     } else {
       // Assigning token
-      const token = jwt.sign({ id: userFound._id }, config.secret.keyword, {
-        expiresIn: 86400,
-      });
+      const token = tokenGenerator(userFound._id);
+      console.log("Already logged user token: ", token);
 
       res.status(200).send({
         matchPassword: matchPassword,
