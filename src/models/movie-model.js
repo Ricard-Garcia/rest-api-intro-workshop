@@ -3,6 +3,10 @@ const { Schema } = require("mongoose");
 
 const MovieSchema = Schema(
   {
+    firebase_id: {
+      type: String,
+      unique: true,
+    },
     title: {
       type: String,
       unique: true,
