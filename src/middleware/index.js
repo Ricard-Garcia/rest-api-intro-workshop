@@ -1,4 +1,4 @@
-const { verifyToken } = require("./auth-jwt");
+const { authMiddleware } = require("./auth-middleware");
 const { userExists } = require("./user-exists");
 
-module.exports = { verifyToken: verifyToken, userExists: userExists };
+module.exports = { authMiddleware: authMiddleware, userExists: userExists };

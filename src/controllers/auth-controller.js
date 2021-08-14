@@ -1,34 +1,27 @@
-const { encryptPassword, comparePassword } = require("../utils/password-hash");
-const { tokenGenerator } = require("../services/token-generator");
-const { sessionData } = require("../session/session");
-const randToken = require("rand-token");
 const db = require("../models");
 
 // /account/register
 // POST user
 async function signUp(req, res, next) {
-  const { name, last_name, email, password, is_admin } = req.body;
+  console.log("Request user", req.user);
+
+  const { uid, email } = req.user;
 
   try {
-    const encryptedPassword = await encryptPassword(password);
+    const user = await db.User.findOne({ email: email });
 
-    const registeredUser = await db.User.create({
-      name: name,
-      last_name: last_name,
+    if (user) {
+      return res.sendStatus(200);
+    }
+
+    const newUser = await db.User.create({
+      firebase_id: uid,
       email: email,
-      password: encryptedPassword,
-      is_admin: is_admin,
     });
 
-    res.status(200).send({
-      message: `Registered user ${name}`,
-      registered: registeredUser,
-    });
+    res.sendStatus(201);
   } catch (error) {
-    res.status(500).send({
-      message: "Failed to register user",
-      error: error.message,
-    });
+    next(error);
   }
 }
 
@@ -39,20 +32,9 @@ async function signIn(req, res, next) {
   if (!userFound) {
     res.status(500).send({ message: "User not found." });
   } else {
-    // Compare password
-    const matchPassword = await comparePassword(
-      req.body.password,
-      userFound.password,
-    );
-
     if (!matchPassword) {
       res.status(401).send({ message: "Not valid password" });
     } else {
-      // Assigning token
-      const accessToken = tokenGenerator(userFound._id);
-      const refreshToken = randToken.generate(256);
-      sessionData.refreshTokens[refreshToken] = userFound._id;
-
       // console.log("Already logged user token: ", accessToken);
 
       res.status(200).send({

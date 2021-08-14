@@ -1,24 +1,26 @@
 const { MovieController, CreditsController } = require("../controllers");
-const { verifyToken } = require("../middleware");
+const { authMiddleware } = require("../middleware");
 const Router = require("express").Router;
 
 // Declaring the router
 const MovieRouter = Router();
 
+MovieRouter.use("/", authMiddleware);
+
 // GET all credits
-MovieRouter.get("/:id/credits", verifyToken, CreditsController.getAll);
+MovieRouter.get("/:id/credits", CreditsController.getAll);
 
 // GET movie
-MovieRouter.get("/:id", verifyToken, MovieController.getById);
+MovieRouter.get("/:id", MovieController.getById);
 // PATCH movie
-MovieRouter.patch("/:id", verifyToken, MovieController.updateById);
+MovieRouter.patch("/:id", MovieController.updateById);
 // DELETE movie
-MovieRouter.delete("/:id", verifyToken, MovieController.deleteById);
+MovieRouter.delete("/:id", MovieController.deleteById);
 
 // POST movie
-MovieRouter.post("/", verifyToken, MovieController.register);
+MovieRouter.post("/", MovieController.register);
 // GET movies
-MovieRouter.get("/", verifyToken, MovieController.getAll);
+MovieRouter.get("/", MovieController.getAll);
 
 module.exports = {
   MovieRouter: MovieRouter,
